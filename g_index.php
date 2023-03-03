@@ -58,7 +58,7 @@ $result = mysqli_query($gcon, $sql);
                         <td><?php echo $row["fname"]; ?></td>
                         <td><?php echo $row["lname"]; ?></td>
                         <td>
-                            <a href="samechart.php?id=<?php echo $row["id"] ?>" class="btn btn-primary">รายละเอียด</a>
+                            <a href="samechart.php?id=<?= $row["id"] ?>" class="btn btn-primary">รายละเอียด</a>
 
                         </td>
                     </tr>
