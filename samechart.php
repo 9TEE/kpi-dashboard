@@ -186,7 +186,7 @@ if ($tol['total2'] >= $tol['total1']) {        //สูตรคำนวณ % �
                     title: 'number'
                     // is3D: true
                 },
-            },
+            };
 
             var chart = new google.visualization.PieChart(document.getElementById('chart'));
             chart.draw(data, options);
@@ -215,7 +215,7 @@ if ($tol['total2'] >= $tol['total1']) {        //สูตรคำนวณ % �
                     sourceColumn: 1,
                     type: "string",
                     role: "annotation"
-                },
+                }
             ]);
 
             var options = {
