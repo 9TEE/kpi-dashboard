@@ -124,7 +124,6 @@ if ($tol['total2'] >= $tol['total1']) {        //สูตรคำนวณ % �
                         color: '#C1C1C1',
                         // bold: true,
                     },
-
                 },
                 hAxis: {
                     textStyle: {
@@ -132,8 +131,6 @@ if ($tol['total2'] >= $tol['total1']) {        //สูตรคำนวณ % �
                         color: '#000000',
                         bold: true,
                     },
-
-
                     title: 'Time',
                     titleTextStyle: {
                         titlePosition: 'out',
@@ -145,7 +142,6 @@ if ($tol['total2'] >= $tol['total1']) {        //สูตรคำนวณ % �
                 },
                 seriesType: 'bars',
                 // series: {2: {type: 'area'}}
-
             };
 
             var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
@@ -188,10 +184,9 @@ if ($tol['total2'] >= $tol['total1']) {        //สูตรคำนวณ % �
                 colors: ['#02f71f', '#f70f0f', ],
                 vAxis: {
                     title: 'number'
+                    // is3D: true
                 },
-                // is3D: true
-
-            };
+            },
 
             var chart = new google.visualization.PieChart(document.getElementById('chart'));
             chart.draw(data, options);
@@ -252,30 +247,26 @@ if ($tol['total2'] >= $tol['total1']) {        //สูตรคำนวณ % �
                 // series: {1: {type: 'area'}}
                 vAxis: {
                     textStyle: {
-                        fontSize: 15, // or the number you want
-                        color: '#000000',
-                        bold: true,
+                        fontSize: 10, // or the number you want
+                        color: '#C1C1C1',
+                        // bold: true,
                         // minValue: 0,
                     },
                 },
                 hAxis: {
                     textStyle: {
-                        fontSize: 15, // or the number you want
+                        fontSize: 10, // or the number you want
                         color: '#000000',
                         bold: true,
                     },
-
                 },
-
             };
-
             var chart = new google.visualization.LineChart(document.getElementById('chartbar'));
             chart.draw(data, options);
         }
     </script>
 
 </head>
-
 <body>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
@@ -379,9 +370,6 @@ if ($tol['total2'] >= $tol['total1']) {        //สูตรคำนวณ % �
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                                 TOTAL TICKET :<span class="" style="font-size: 1rem;"><?= $tol['total2'];  ?></span>
                                             </li>
-
-
-
                                         </ul>
                                     </div>
                                 </div>
