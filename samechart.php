@@ -50,7 +50,7 @@ if ($tol['total2'] >= $tol['total1']) {        //สูตรคำนวณ % �
 
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="loader.js"></script>
     <script type="text/javascript">
         google.charts.load('current', {
             'packages': ['corechart']
@@ -131,6 +131,7 @@ if ($tol['total2'] >= $tol['total1']) {        //สูตรคำนวณ % �
                         color: '#000000',
                         bold: true,
                     },
+                    //ชื่อบอก แกน Y
                     title: 'Time',
                     titleTextStyle: {
                         titlePosition: 'out',
@@ -140,11 +141,11 @@ if ($tol['total2'] >= $tol['total1']) {        //สูตรคำนวณ % �
                         italic: true, // true of false
                     },
                 },
-                seriesType: 'bars',
+                // seriesType: 'bars',
                 // series: {2: {type: 'area'}}
             };
 
-            var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+            var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
             chart.draw(view, options);
         }
 
@@ -196,13 +197,13 @@ if ($tol['total2'] >= $tol['total1']) {        //สูตรคำนวณ % �
             // Some raw data (not necessarily accurate)
             var data = new google.visualization.arrayToDataTable([
 
-                ["Element", "AHT", ],
+                ["Element", "AHT", "CALL"],
                 <?php
                 $ra = mysqli_query($gcon, $gap);
                 while ($ar = mysqli_fetch_assoc($ra)) {
                 ?>
 
-                    ['<?= date('H:i', strtotime($ar['time'])); ?>', <?= $ar['aht']; ?>, ],
+                    ['<?= date('H:i', strtotime($ar['time'])); ?>', <?= $ar['aht']; ?>, <?= $ar['pcall']; ?>],
 
                 <?php } ?>
 
@@ -221,8 +222,9 @@ if ($tol['total2'] >= $tol['total1']) {        //สูตรคำนวณ % �
             var options = {
                 title: 'กราฟแสดงค่าเฉลี่ย AHT ตามช่วงเวลา "<?php echo $tt ?> - <?php echo $ee ?>"',
                 curveType: 'function',
-                colors: ['#FD0006', ],
+                colors: ['#FD0006', '#000000'],
                 pointSize: 6, //เป็นการใส่จุดใน กราฟเส้น
+                //สัญลักษณ์ ที่เรากำหนดเป็นอย่างอื่น ตามที่ได้ commentไว้
                 series: {
                     0: {
                         pointShape: 'circle'
@@ -260,8 +262,10 @@ if ($tol['total2'] >= $tol['total1']) {        //สูตรคำนวณ % �
                         bold: true,
                     },
                 },
+                seriesType: 'bars',
+                series: {1: {type: 'line'}}
             };
-            var chart = new google.visualization.LineChart(document.getElementById('chartbar'));
+            var chart = new google.visualization.ComboChart(document.getElementById('chartbar'));
             chart.draw(data, options);
         }
     </script>
@@ -269,7 +273,7 @@ if ($tol['total2'] >= $tol['total1']) {        //สูตรคำนวณ % �
 </head>
 
 <body>
-    
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
     </script>
@@ -293,29 +297,28 @@ if ($tol['total2'] >= $tol['total1']) {        //สูตรคำนวณ % �
       <input type="date" class="btn btn-outline-primary" name="date" disabled>
       </div> -->
 
-                <div class="col">
-                    <div>
-                        <!-- หน้ากรอกข้อมูลเวลา -->
-                        <div>
-                            <form action="<?= $_SERVER['PHP_SELF']; ?>?id=<?= $id; ?>" method="post">
-                                <input type="hidden" value="<?= $id ?>" name="id">
-                                <input type="time" class="time btn btn-outline-primary" name="st" value="<?= $_POST['st']; ?>"> ถึง
-                                <input type="time" class="time btn btn-outline-danger" name="en" value="<?= $_POST['en']; ?>">
-                                <button type="submit" class="btn btn-Success"><i class="bi bi-clock-fill"></i>
-                                    ค้นหา</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <hr class="my-2" style="background-color:#000000;">
-
-
-                <div class="">
-                    <div class="d-grid w-25">
+                <div class="row">
+                    <div class="col-2">
                         <!-- <a href="#chart" class="btn btn-danger">Pie Chart<i class="bi bi-chevron-bar-down"></i></a> -->
                         <a href="g_index.php" class="btn" style="font-size: 1rem; color:aliceblue; background-color:#000000; "><i class="bi bi-arrow-left-circle-fill"></i>
                             กลับหน้าแรก</a>
                     </div>
+                    <!-- หน้ากรอกข้อมูลเวลา -->
+                    <div class="col-8">
+                        <form action="<?= $_SERVER['PHP_SELF']; ?>?id=<?= $id; ?>" method="post">
+                            <input type="hidden" value="<?= $id ?>" name="id">
+                            <input type="time" class="time btn btn-outline-primary" name="st" value="<?= $_POST['st']; ?>"> ถึง
+                            <input type="time" class="time btn btn-outline-danger" name="en" value="<?= $_POST['en']; ?>">
+                            <button type="submit" class="btn btn-info"><i class="bi bi-clock-fill"></i>
+                                ค้นหา</button>
+                        </form>
+                    </div>
+                </div>
+                <!-- <hr class="my-2" style="background-color:#000000;"> -->
+
+
+                <div class="">
+
 
 
                     <table class="container">
