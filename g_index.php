@@ -1,8 +1,14 @@
 <?php
 require('goconnect.php');
+// if (isset($_GET['op'])) {
+//     $sql = "SELECT * FROM employee where Role='" . $_GET['op'] . "'";
+//     $result = mysqli_query($gcon, $sql);
+// } else {
+//     $sql = "SELECT * FROM employee";
+//     $result = mysqli_query($gcon, $sql);
+// }
 
-$sql = "SELECT * FROM employee";
-$result = mysqli_query($gcon, $sql);
+
 
 $tal = "SELECT SUM(pcall) AS total1,              
                SUM(ticket) AS total2           
@@ -24,7 +30,9 @@ $tol = mysqli_fetch_assoc($rs);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
 
     <!--คำสั่งติดตั้ง Jquery -->
@@ -42,28 +50,11 @@ $tol = mysqli_fetch_assoc($rs);
             $('#data').DataTable();
         });
     </script>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-dark">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <?php
+
+include('menubar.php');
+
+    ?>
 
 
     <div class="container">
@@ -103,7 +94,7 @@ $tol = mysqli_fetch_assoc($rs);
                         <td class="text-end"><?php echo $order++; ?></td>
                         <td class=""><?php echo $row["fname"]; ?></td>
                         <td><?php echo $row["lname"]; ?></td>
-                        <td class="text-center"><span class="badge text-bg-success" style="width: 7rem; height:2rem;"><?php echo $row["role"]; ?></span></td>
+                        <td class="text-center"><?php echo $row["role"]; ?></td>
                         <td class="text-center">
                             <?php if ($tol['total2'] >= $tol['total1']) { ?>
 

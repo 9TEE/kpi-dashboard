@@ -102,6 +102,9 @@ if ($tol['total2'] >= $tol['total1']) {        //สูตรคำนวณ % �
             //ปรับแต่งกราฟ
             var options = {
                 title: 'กราฟแสดงเวลาตั้งแต่ "<?php echo $tt ?> - <?php echo $ee ?>"',
+                animation: {
+                    duration: 1000
+                },
                 hover: {
                     "fill": {
                         "value": "red"
@@ -222,7 +225,7 @@ if ($tol['total2'] >= $tol['total1']) {        //สูตรคำนวณ % �
             var options = {
                 title: 'กราฟแสดงค่าเฉลี่ย AHT ตามช่วงเวลา "<?php echo $tt ?> - <?php echo $ee ?>"',
                 curveType: 'function',
-                colors: ['#FD0006', '#000000'],
+                colors: ['#BB0035', '#3C0011'],
                 pointSize: 6, //เป็นการใส่จุดใน กราฟเส้น
                 //สัญลักษณ์ ที่เรากำหนดเป็นอย่างอื่น ตามที่ได้ commentไว้
                 series: {
@@ -263,7 +266,11 @@ if ($tol['total2'] >= $tol['total1']) {        //สูตรคำนวณ % �
                     },
                 },
                 seriesType: 'bars',
-                series: {1: {type: 'line'}}
+                series: {
+                    1: {
+                        type: 'line'
+                    }
+                }
             };
             var chart = new google.visualization.ComboChart(document.getElementById('chartbar'));
             chart.draw(data, options);
